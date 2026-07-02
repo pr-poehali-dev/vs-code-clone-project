@@ -5,8 +5,9 @@ import FileTree from '@/components/ide/FileTree';
 import Terminal from '@/components/ide/Terminal';
 import { detectLang } from '@/lib/highlight';
 import {
-  FSNode, initialTree, findNode, removeNode, updateNode, addNode, uid,
+  FSNode, findNode, removeNode, updateNode, addNode, uid,
 } from '@/lib/vfs';
+import { projectTree } from '@/lib/projectSource';
 
 type Panel = 'files' | 'search' | 'debug' | 'ext';
 
@@ -29,7 +30,7 @@ const EXTENSIONS = [
 ];
 
 export default function Index() {
-  const [tree, setTree] = useState<FSNode[]>(initialTree);
+  const [tree, setTree] = useState<FSNode[]>(projectTree);
   const [tabs, setTabs] = useState<OpenTab[]>([]);
   const [activeId, setActiveId] = useState<string | null>(null);
   const [renamingId, setRenamingId] = useState<string | null>(null);
@@ -158,7 +159,7 @@ export default function Index() {
             ))}
           </span>
         </div>
-        <span className="text-[#858585]">my-project — Editor</span>
+        <span className="text-[#858585]">vscode-clone — Editor</span>
         <div className="w-16" />
       </div>
 
@@ -201,7 +202,7 @@ export default function Index() {
                   <button title="Новая папка" onClick={() => createRoot('folder')} className="hover:text-white text-[#858585]"><Icon name="FolderPlus" size={16} /></button>
                 </div>
               </div>
-              <div className="px-4 py-1 text-[11px] font-bold uppercase text-[#cccccc]">MY-PROJECT</div>
+              <div className="px-4 py-1 text-[11px] font-bold uppercase text-[#cccccc]">VSCODE-CLONE</div>
               <div className="flex-1 overflow-auto pb-4">
                 <FileTree
                   nodes={tree}
@@ -353,7 +354,7 @@ export default function Index() {
           {activeNode && (
             <div className="flex h-6 items-center gap-1 bg-[#1e1e1e] px-4 text-[12px] text-[#858585] shrink-0">
               <Icon name="Files" size={12} />
-              <span>my-project</span>
+              <span>vscode-clone</span>
               <Icon name="ChevronRight" size={12} />
               <span className="text-[#cccccc]">{activeNode.name}</span>
               <button onClick={save} title="Сохранить (Ctrl+S)" className="ml-auto flex items-center gap-1 hover:text-white">
