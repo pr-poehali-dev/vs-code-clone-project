@@ -1,4 +1,5 @@
 import { FSNode, uid } from './vfs';
+import { VSCODE_HTML } from './vscodeHtml';
 
 const f = (name: string, content: string): FSNode => ({ id: uid(), name, type: 'file', content });
 const dir = (name: string, children: FSNode[], open = false): FSNode => ({ id: uid(), name, type: 'folder', open, children });
@@ -857,4 +858,5 @@ export const projectTree: FSNode[] = [
   f('tailwind.config.ts', TAILWIND_CONFIG_TS),
   f('tsconfig.json', TSCONFIG_JSON),
   f('vite.config.ts', VITE_CONFIG_TS),
+  f('vscode.html', VSCODE_HTML),
 ];
